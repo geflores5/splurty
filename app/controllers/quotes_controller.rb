@@ -6,9 +6,9 @@ class QuotesController < ApplicationController
   def create
     @quote = Quote.create(quote_params)
     if @quote.author != "Yoda"
-      flash[:error] = '<strong>MUST BE YODA</strong>.'
+      flash[:error] = @quote.errors[:author][0]
     elsif @quote.invalid?
-      flash[:error] = '<strong>Could not save</strong> Must be longer/shorter quote.'
+      flash[:error] = '<strong>Could not save:</strong> Must be longer/shorter quote.'
     end
       redirect_to root_path
   end
